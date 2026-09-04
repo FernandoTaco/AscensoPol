@@ -303,6 +303,14 @@
       padding: 6px 10px;
       margin-bottom: 10px;
       min-height: 44px;
+      background: #17324d;
+      color: #ffffff;
+    }
+
+    .alto-contraste .barra-usuario {
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid #ffffff;
     }
 
     .usuario-activo {
@@ -327,6 +335,25 @@
     }
 
     .btn-cerrar-sesion:hover { background: #c82333; }
+
+    .btn-lector-github {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      padding: 0;
+      margin: 0 4px 0 auto;
+      border-radius: 50%;
+      background: #218c55;
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .btn-lector-github:hover { background: #176b40; }
 
     #titulo-simulador {
       margin-bottom: 12px;
@@ -485,6 +512,7 @@
   <div class="contenido-simulador" id="contenido-simulador">
     <div class="barra-superior barra-usuario">
       <span class="usuario-activo">👤: <strong id="usuarioActivo"></strong></span>
+      <a class="btn-lector-github" href="lector.html" title="Abrir lector" aria-label="Abrir lector" target="_blank" rel="noopener">📖</a>
       <button class="btn-cerrar-sesion" title="Cerrar sesión" aria-label="Cerrar sesión" onclick="cerrarSesion()">⏻</button>
     </div>
     <!-- ==============================================
