@@ -562,6 +562,131 @@
       color: #ffffff;
     }
     .alto-contraste .barra-superior.barra-usuario .usuario-activo { color: #ffffff; }
+
+    /* ===== CONTROLES COMPACTOS PARA CELULAR ===== */
+    .btn-reiniciar-dificiles,
+    .btn-llave,
+    .btn-dificil,
+    .barra-controles-examen .btn-contraste,
+    .btn-cerrar-sesion {
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+      padding: 0 !important;
+      font-size: 20px !important;
+      line-height: 1 !important;
+      border-radius: 50% !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-reiniciar-dificiles,
+    .btn-llave,
+    .btn-dificil { margin: 0 !important; }
+    .barra-controles-examen .btn-contraste { margin: 0 0 0 auto !important; }
+    .barra-superior.barra-usuario .btn-cerrar-sesion { margin: 0 !important; }
+    .barra-superior.barra-usuario .usuario-activo {
+      font-size: 14px !important;
+      line-height: 1.2;
+    }
+
+    /* ===== BARRAS COMPACTAS Y ORDENADAS PARA CELULAR ===== */
+    .barra-superior.barra-usuario {
+      height: 38px;
+      min-height: 38px;
+      padding: 0 8px;
+      align-items: center;
+    }
+    .barra-superior.barra-usuario .btn-cerrar-sesion {
+      width: 35px !important;
+      min-width: 35px !important;
+      max-width: 35px !important;
+      height: 35px !important;
+      min-height: 35px !important;
+      max-height: 35px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      font-size: 18px !important;
+      background: #f08080 !important;
+      color: #ffffff !important;
+      border-radius: 50% !important;
+    }
+    .barra-superior.barra-usuario .btn-cerrar-sesion:hover,
+    .alto-contraste .barra-superior.barra-usuario .btn-cerrar-sesion {
+      background: #e57373 !important;
+      color: #ffffff !important;
+    }
+    .barra-lectura {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      flex-wrap: nowrap !important;
+      gap: 4px !important;
+      width: 100%;
+      overflow: hidden;
+    }
+    .etiquetas-lectura {
+      order: 1;
+      display: flex !important;
+      align-items: center !important;
+      gap: 3px !important;
+      flex: 1 1 auto !important;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .barra-lectura .contador-lectura {
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      padding: 2px 5px !important;
+      font-size: 13px !important;
+      line-height: 1 !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    .botones-lectura {
+      order: 2;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 3px !important;
+      flex: 0 0 auto;
+      margin-left: 0 !important;
+    }
+    .botones-lectura .btn-reiniciar-dificiles,
+    .botones-lectura .btn-llave,
+    .botones-lectura .btn-dificil,
+    .botones-lectura .btn-contraste {
+      width: 36px !important;
+      min-width: 36px !important;
+      max-width: 36px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      font-size: 18px !important;
+      line-height: 1 !important;
+      border-radius: 50% !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 600px) {
+      .barra-lectura { align-items: center !important; gap: 3px !important; }
+      .barra-lectura .contador-lectura { font-size: 12px !important; padding: 2px 4px !important; }
+      .botones-lectura { gap: 2px !important; }
+      .botones-lectura .btn-reiniciar-dificiles,
+      .botones-lectura .btn-llave,
+      .botones-lectura .btn-dificil,
+      .botones-lectura .btn-contraste { width: 34px !important; min-width: 34px !important; max-width: 34px !important; height: 34px !important; min-height: 34px !important; max-height: 34px !important; font-size: 17px !important; }
+    }
 </style>
 </head>
 <body>
@@ -595,7 +720,7 @@
     <div class="barra-controles-examen barra-lectura">
       <div class="etiquetas-lectura">
         <div class="contador-lectura">📚 <span id="num-pregunta-actual">0</span>/<span id="total-preguntas">0</span></div>
-        <div class="contador-lectura" id="etiqueta-llave">🔑 ·5</div>
+        <div class="contador-lectura" id="etiqueta-llave">🔑·5</div>
         <div class="contador-lectura">🎣 <span id="num-dificiles">0</span></div>
       </div>
       <div class="botones-lectura">
@@ -746,7 +871,7 @@ function actualizarBloques(){
  for(let inicio=0;inicio<total;inicio+=10){let fin=Math.min(inicio+10,total); const o=document.createElement('option');o.value=`${inicio}-${fin}`;o.textContent=`Preguntas ${inicio+1}–${fin}`;sel.appendChild(o);}
  const all=document.createElement('option');all.value='todas';all.textContent='Todas las preguntas del tema (${total})';sel.appendChild(all);
 }
-function actualizarEtiquetaLlave(){const el=document.getElementById('etiqueta-llave');if(el)el.textContent='🔑 ·'+(document.getElementById('selector-analisis').value||'5');}
+function actualizarEtiquetaLlave(){const el=document.getElementById('etiqueta-llave');if(el)el.textContent='🔑·'+(document.getElementById('selector-analisis').value||'5');}
 function opcionesAnalisis(){const sel=document.getElementById('selector-analisis'); sel.innerHTML=''; for(let i=1;i<=5;i++){const o=document.createElement('option');o.value=i;o.textContent=`Llaves de hasta ${i} palabra${i===1?'':'s'}`;if(i===5)o.selected=true;sel.appendChild(o);} actualizarEtiquetaLlave();}
 function mezclarIndices(){const a=[0,1,2,3,4];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function iniciarLectura(){
