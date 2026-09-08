@@ -519,6 +519,49 @@
     .pista-contraste .tipo-contraste { color:#9a3412; font-weight:700; }
     .alto-contraste .pista-contraste .tipo-contraste { color:#ffd39b; }
     @media (max-width:600px) { .barra-lectura { align-items:flex-start; } .etiquetas-lectura { flex:1 1 55%; } .botones-lectura { flex:0 0 auto; } }
+
+    /* ===== BOTONES DE VOZ EN CADA ENUNCIADO ===== */
+    .enunciado { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .texto-enunciado { flex: 1 1 600px; min-width: 0; }
+    .botones-voz { display: inline-flex; gap: 8px; align-items: center; flex: 0 0 auto; }
+    .btn-voz {
+      width: 48px !important; min-width: 48px !important; max-width: 48px !important;
+      height: 48px; padding: 0 !important; margin: 0 !important;
+      border-radius: 50% !important; border: 2px solid #159bc4 !important;
+      background: #7ddbf5 !important; color: #073b4c !important;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 23px; line-height: 1; box-shadow: 0 2px 5px rgba(0,0,0,.18);
+    }
+    .btn-voz:hover { background: #51c8ed !important; transform: scale(1.05); }
+    .btn-voz.leyendo { background: #39b8df !important; box-shadow: 0 0 0 4px rgba(57,184,223,.28); }
+    .alto-contraste .btn-voz { background: #56d8ff !important; color: #001b26 !important; border-color: #b8f1ff !important; }
+    @media (max-width: 600px) {
+      .enunciado { gap: 8px; }
+      .btn-voz { width: 44px !important; min-width: 44px !important; max-width: 44px !important; height: 44px; font-size: 20px; }
+    }
+
+    /* ===== BOTONES DE VOZ EN CADA RESPUESTA ===== */
+    .respuesta-final { display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+    .texto-respuesta { flex:1 1 600px; min-width:0; }
+
+    /* ===== BARRA SUPERIOR EN VERDE ===== */
+    .barra-superior.barra-usuario {
+      background: #e8f5e9;
+      border: 1px solid #68a878;
+      color: #155724;
+    }
+    .barra-superior.barra-usuario .usuario-activo { color: #155724; }
+    .barra-superior.barra-usuario .btn-cerrar-sesion {
+      background: #68a878;
+      color: #ffffff;
+    }
+    .barra-superior.barra-usuario .btn-cerrar-sesion:hover { background: #4f8f62; }
+    .alto-contraste .barra-superior.barra-usuario {
+      background: #253d2a;
+      border-color: #9be7aa;
+      color: #ffffff;
+    }
+    .alto-contraste .barra-superior.barra-usuario .usuario-activo { color: #ffffff; }
 </style>
 </head>
 <body>
@@ -537,7 +580,6 @@
     <button class="btn-cerrar-sesion" title="Cerrar sesión" aria-label="Cerrar sesión" onclick="cerrarSesion()">⏻</button>
   </div>
   <h1 id="titulo-simulador">📖 Lector de estudio PNP — Candado–Llave y pistas de contraste</h1>
-  <div class="modo-lectura">Modo lectura: la respuesta correcta se muestra de inmediato. Usa 🎣 para marcar preguntas difíciles y repasarlas al terminar.</div>
 
   <div class="lector-panel" id="panel-config">
     <div class="config-row"><label for="selector-tema">📖 Selecciona el tema:</label><select id="selector-tema"></select></div>
@@ -553,7 +595,7 @@
     <div class="barra-controles-examen barra-lectura">
       <div class="etiquetas-lectura">
         <div class="contador-lectura">📚 <span id="num-pregunta-actual">0</span>/<span id="total-preguntas">0</span></div>
-        <div class="contador-lectura">🔑 Sistema completo · máximo 5 palabras</div>
+        <div class="contador-lectura" id="etiqueta-llave">🔑 ·5</div>
         <div class="contador-lectura">🎣 <span id="num-dificiles">0</span></div>
       </div>
       <div class="botones-lectura">
@@ -704,11 +746,12 @@ function actualizarBloques(){
  for(let inicio=0;inicio<total;inicio+=10){let fin=Math.min(inicio+10,total); const o=document.createElement('option');o.value=`${inicio}-${fin}`;o.textContent=`Preguntas ${inicio+1}–${fin}`;sel.appendChild(o);}
  const all=document.createElement('option');all.value='todas';all.textContent='Todas las preguntas del tema (${total})';sel.appendChild(all);
 }
-function opcionesAnalisis(){const sel=document.getElementById('selector-analisis'); sel.innerHTML=''; for(let i=1;i<=5;i++){const o=document.createElement('option');o.value=i;o.textContent=`Llaves de hasta ${i} palabra${i===1?'':'s'}`;if(i===5)o.selected=true;sel.appendChild(o);}}
+function actualizarEtiquetaLlave(){const el=document.getElementById('etiqueta-llave');if(el)el.textContent='🔑 ·'+(document.getElementById('selector-analisis').value||'5');}
+function opcionesAnalisis(){const sel=document.getElementById('selector-analisis'); sel.innerHTML=''; for(let i=1;i<=5;i++){const o=document.createElement('option');o.value=i;o.textContent=`Llaves de hasta ${i} palabra${i===1?'':'s'}`;if(i===5)o.selected=true;sel.appendChild(o);} actualizarEtiquetaLlave();}
 function mezclarIndices(){const a=[0,1,2,3,4];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function iniciarLectura(){
  if(!document.getElementById('selector-tema').value){inicializarLector();}
- temaSeleccionado=document.getElementById('selector-tema').value; limitePalabras=parseInt(document.getElementById('selector-analisis').value||'5',10); modoRepaso=false;
+ temaSeleccionado=document.getElementById('selector-tema').value; limitePalabras=parseInt(document.getElementById('selector-analisis').value||'5',10); actualizarEtiquetaLlave(); modoRepaso=false;
  const base=preguntasTema(temaSeleccionado); const rango=document.getElementById('selector-cantidad').value;
  let ini=0,fin=base.length; if(rango!=='todas') [ini,fin]=rango.split('-').map(Number); const keys=Object.keys(bancoPreguntas); const offset=temaSeleccionado==='todos'?0:keys.slice(0,keys.indexOf(temaSeleccionado)).reduce((s,k)=>s+bancoPreguntas[k].length,0);
  const seleccion=base.slice(ini,fin); preguntasSeleccionadas=seleccion.map((p,i)=>({...p,id:offset+ini+i+1,mostrandoLlave:false,evaluada:false,seleccionada:null,ordenAlternativas:mezclarIndices()}));
@@ -734,7 +777,7 @@ function renderizarPregunta(){
  }).join('');
  const llave=revelada&&!esSinLlave?`<span class="etiqueta-llave">${escaparHTML(p.llave.join(' '))}</span>`:revelada?`<span class="nota-sin-llave">[sin llave única]</span>`:`<span class="nota-sin-llave">pulsa 🗝️ para revelar</span>`;
  const candadoEtiqueta=mostrarPistas?(p.candado&&p.candado.length?escaparHTML(p.candado.join(' ')):'sin palabra clave'):'oculto hasta iniciar el repaso';
- const respuesta=p.evaluada?`<div class="respuesta-final"><strong>Respuesta:</strong> ${esSinLlave?marcarTokens(p.alternativas[p.correcta],palabrasDeFrase((p.contraste&&p.contraste.pista)||''),'palabra-naranja'):(revelada?marcarTokens(p.alternativas[p.correcta],p.llave,'palabra-verde'):escaparHTML(p.alternativas[p.correcta]))}</div>`:'';
+ const respuesta=p.evaluada?`<div class="respuesta-final"><span class="texto-respuesta"><strong>Respuesta:</strong> ${esSinLlave?marcarTokens(p.alternativas[p.correcta],palabrasDeFrase((p.contraste&&p.contraste.pista)||''),'palabra-naranja'):(revelada?marcarTokens(p.alternativas[p.correcta],p.llave,'palabra-verde'):escaparHTML(p.alternativas[p.correcta]))}</span><span class="botones-voz" aria-label="Controles de lectura de la respuesta"><button type="button" class="btn-voz btn-iniciar-voz-respuesta" title="Leer respuesta en voz alta" aria-label="Leer respuesta en voz alta" onclick="leerRespuesta(this)">🔊</button><button type="button" class="btn-voz btn-detener-voz-respuesta" title="Detener lectura de la respuesta" aria-label="Detener lectura de la respuesta" onclick="detenerLectura()">⏹️</button></span></div>`:'';
  let ficha='';
  if(p.evaluada){
    if(esSinLlave){
@@ -744,7 +787,7 @@ function renderizarPregunta(){
      ficha=`<div class="candado-llave"><div><strong>Clasificación:</strong> ${escaparHTML(p.clasificacion||'')}</div><div><strong>Candado:</strong> <span class="etiqueta-candado">${candadoEtiqueta}</span> - <strong>Llave:</strong> ${llave}</div></div>`;
    }
  }
- cont.innerHTML=`<div class="etiqueta-tema">${escaparHTML(p.temaNombre)}</div><div class="progreso progreso-pregunta"><strong>Pregunta ${indiceActual+1} de ${preguntasSeleccionadas.length}</strong><div class="barra-progreso"><div class="relleno-progreso" style="width:${((indiceActual+1)/preguntasSeleccionadas.length)*100}%"></div></div></div><div class="pregunta"><div class="enunciado">${p.id}. ${candado}</div>${alts}${respuesta}${ficha}</div>`;
+ cont.innerHTML=`<div class="etiqueta-tema">${escaparHTML(p.temaNombre)}</div><div class="progreso progreso-pregunta"><strong>Pregunta ${indiceActual+1} de ${preguntasSeleccionadas.length}</strong><div class="barra-progreso"><div class="relleno-progreso" style="width:${((indiceActual+1)/preguntasSeleccionadas.length)*100}%"></div></div></div><div class="pregunta"><div class="enunciado"><span class="texto-enunciado">${p.id}. ${candado}</span><span class="botones-voz" aria-label="Controles de lectura"><button type="button" class="btn-voz btn-iniciar-voz" title="Iniciar lectura en voz alta" aria-label="Iniciar lectura en voz alta" onclick="leerEnunciado(this)">🔊</button><button type="button" class="btn-voz btn-detener-voz" title="Detener lectura" aria-label="Detener lectura" onclick="detenerLectura()">⏹️</button></span></div>${alts}${respuesta}${ficha}</div>`;
  document.getElementById('num-pregunta-actual').textContent=indiceActual+1;document.getElementById('total-preguntas').textContent=preguntasSeleccionadas.length;document.getElementById('num-dificiles').textContent=dificiles.size;
  const bk=document.getElementById('btn-llave'); bk.disabled=false; bk.classList.toggle('sin-llave',esSinLlave); bk.classList.toggle('revelada',revelada); bk.setAttribute('aria-pressed',String(revelada)); bk.title=esSinLlave?(revelada?'Respuesta y contraste mostrados':'Revelar respuesta y pista de contraste'):(revelada?'Llave revelada':'Revelar la llave y la alternativa correcta');
  const btn=document.getElementById('btn-dificil'); const marked=dificiles.has(p.id);btn.classList.toggle('marcada',marked);btn.setAttribute('aria-pressed',String(marked));btn.title=marked?'Quitar de preguntas difíciles':'Marcar esta pregunta como difícil';
@@ -787,6 +830,75 @@ function reiniciarTodo(){preguntasSeleccionadas=[];indiceActual=0;modoRepaso=fal
 async function obtenerHash(texto){const data=new TextEncoder().encode(texto);const buf=await crypto.subtle.digest('SHA-256',data);return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
 async function verificarAcceso(){const btn=document.querySelector('#caja-login button'),err=document.getElementById('mensaje-error');if(btn.disabled)return;btn.disabled=true;try{const u=document.getElementById('usuario').value.trim().toUpperCase(),p=document.getElementById('contrasenia').value;if(!u||!p){err.textContent='⚠️ Completa ambos campos.';err.style.display='block';return;}const h=await obtenerHash(p),ok=baseUsuarios.find(x=>x.usuario===u&&x.hash===h);if(ok){err.style.display='none';document.getElementById('caja-login').style.display='none';document.getElementById('contenido-simulador').style.display='block';document.getElementById('usuarioActivo').textContent=ok.usuario;}else{err.textContent='❌ Usuario o contraseña incorrectos.';err.style.display='block';document.getElementById('contrasenia').value='';}}catch(e){err.textContent='⚠️ No se pudo validar el acceso.';err.style.display='block';}finally{btn.disabled=false;}}
 function cerrarSesion(){reiniciarTodo();document.getElementById('contenido-simulador').style.display='none';document.getElementById('caja-login').style.display='block';document.getElementById('usuario').value='';document.getElementById('contrasenia').value='';document.getElementById('mensaje-error').style.display='none';}
+
+
+/* ===== LECTOR DE VOZ PARA CADA ENUNCIADO ===== */
+let botonVozActivo = null;
+
+function detenerLectura() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if (botonVozActivo) {
+    botonVozActivo.classList.remove('leyendo');
+    botonVozActivo = null;
+  }
+}
+
+function leerEnunciado(boton) {
+  if (!('speechSynthesis' in window)) {
+    alert('Este navegador no admite lectura en voz alta. Prueba con Chrome o Edge.');
+    return;
+  }
+  detenerLectura();
+  const bloque = boton.closest('.enunciado');
+  const texto = bloque.querySelector('.texto-enunciado').innerText
+    .replace(/\s+/g, ' ').trim();
+  if (!texto) return;
+
+  const lectura = new SpeechSynthesisUtterance(texto);
+  lectura.lang = 'es-PE';
+  lectura.rate = 0.9;
+  lectura.pitch = 1;
+  const voces = window.speechSynthesis.getVoices();
+  const voz = voces.find(v => /^es-PE$/i.test(v.lang))
+    || voces.find(v => /^es(-|$)/i.test(v.lang));
+  if (voz) lectura.voice = voz;
+
+  botonVozActivo = boton;
+  boton.classList.add('leyendo');
+  lectura.onend = detenerLectura;
+  lectura.onerror = detenerLectura;
+  window.speechSynthesis.speak(lectura);
+}
+
+
+
+function leerRespuesta(boton) {
+  if (!('speechSynthesis' in window)) {
+    alert('Este navegador no admite lectura en voz alta. Prueba con Chrome o Edge.');
+    return;
+  }
+  detenerLectura();
+  const bloque = boton.closest('.respuesta-final');
+  const texto = bloque.querySelector('.texto-respuesta').innerText
+    .replace(/\s+/g, ' ').trim();
+  if (!texto) return;
+
+  const lectura = new SpeechSynthesisUtterance(texto);
+  lectura.lang = 'es-PE';
+  lectura.rate = 0.9;
+  lectura.pitch = 1;
+  const voces = window.speechSynthesis.getVoices();
+  const voz = voces.find(v => /^es-PE$/i.test(v.lang))
+    || voces.find(v => /^es(-|$)/i.test(v.lang));
+  if (voz) lectura.voice = voz;
+
+  botonVozActivo = boton;
+  boton.classList.add('leyendo');
+  lectura.onend = detenerLectura;
+  lectura.onerror = detenerLectura;
+  window.speechSynthesis.speak(lectura);
+}
+
 function inicializarLector(){try{opcionesTema();opcionesAnalisis();}catch(e){console.error('No se pudo inicializar el lector',e);}} if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',inicializarLector);}else{inicializarLector();} document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('caja-login').style.display!=='none'){e.preventDefault();verificarAcceso();}});
 </script>
 </body></html>
