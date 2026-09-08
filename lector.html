@@ -687,6 +687,36 @@
       .botones-lectura .btn-dificil,
       .botones-lectura .btn-contraste { width: 34px !important; min-width: 34px !important; max-width: 34px !important; height: 34px !important; min-height: 34px !important; max-height: 34px !important; font-size: 17px !important; }
     }
+
+    /* En pantallas pequeñas: ♻️ 🗝️ 🎣 a 40 px; 🎨 conserva su tamaño compacto */
+    @media (max-width: 600px) {
+      .botones-lectura .btn-reiniciar-dificiles,
+      .botones-lectura .btn-llave,
+      .botones-lectura .btn-dificil {
+        width: 40px !important;
+        min-width: 40px !important;
+        max-width: 40px !important;
+        height: 40px !important;
+        min-height: 40px !important;
+        max-height: 40px !important;
+        font-size: 19px !important;
+      }
+    }
+
+    /* Separación idéntica entre ♻️, 🗝️, 🎣 y 🎨 */
+    @media (max-width: 600px) {
+      .botones-lectura {
+        gap: 4px !important;
+        margin-left: 0 !important;
+      }
+      .botones-lectura .btn-reiniciar-dificiles,
+      .botones-lectura .btn-llave,
+      .botones-lectura .btn-dificil,
+      .botones-lectura .btn-contraste {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
 </style>
 </head>
 <body>
