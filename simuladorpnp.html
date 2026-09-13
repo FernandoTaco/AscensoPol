@@ -185,6 +185,7 @@
     .btn-red:hover { background: #c82333; }
     .btn-contraste { background: #6c2bd9; color: white; white-space: nowrap; }
     .btn-contraste:hover { background: #5a21b8; }
+    .btn-sonido{width:38px!important;min-width:38px!important;height:38px!important;padding:0!important;margin:0 2px!important;border-radius:50%!important;font-size:19px!important;background:#28a745;color:#fff;border:0;cursor:pointer}.btn-sonido.silenciado{background:#6c757d}
 
     .pregunta {
       background: var(--fondo-tarjeta);
@@ -548,6 +549,7 @@
       <div class="contador aciertos">✅ : <span id="num-aciertos">0</span></div>
       <div class="contador falladas">❌ : <span id="num-falladas">0</span></div>
       <div class="contador porcentaje">📊 : <span id="num-porcentaje">0</span>%</div>
+      <button class="btn-sonido" id="btn-sonido" title="Silenciar efectos de sonido" aria-label="Silenciar efectos de sonido" aria-pressed="true" onclick="alternarSonido()">🔊</button>
       <button class="btn-contraste" title="Cambiar contraste" aria-label="Cambiar contraste" onclick="cambiarContraste()">🎨</button>
     </div>
   </div>
@@ -17145,9 +17147,12 @@
     let temaSeleccionado = 'todos';
     let timerAvance = null;
     let contextoAudio = null;
+    let sonidosActivos = true;
     function obtenerContextoAudio(){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;if(!contextoAudio)contextoAudio=new C();if(contextoAudio.state==='suspended')contextoAudio.resume();return contextoAudio;}
-    function sonidoCorrecto(){const c=obtenerContextoAudio();if(!c)return;const t=c.currentTime;[[523.25,0],[659.25,.12],[783.99,.24],[1046.5,.38]].forEach(([f,d])=>{const o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.16,t+d+.04);g.gain.exponentialRampToValueAtTime(.0001,t+d+.28);o.connect(g);g.connect(c.destination);o.start(t+d);o.stop(t+d+.3);});}
-    function sonidoIncorrecto(){const c=obtenerContextoAudio();if(!c)return;const t=c.currentTime,d=.42,b=c.createBuffer(1,c.sampleRate*d,c.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*Math.pow(1-i/a.length,1.7);const n=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();n.buffer=b;f.type='lowpass';f.frequency.setValueAtTime(2600,t);f.frequency.exponentialRampToValueAtTime(75,t+d);g.gain.setValueAtTime(.68,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);n.connect(f);f.connect(g);g.connect(c.destination);n.start(t);n.stop(t+d);const o=c.createOscillator(),go=c.createGain();o.frequency.setValueAtTime(155,t);o.frequency.exponentialRampToValueAtTime(34,t+.32);go.gain.setValueAtTime(.72,t);go.gain.exponentialRampToValueAtTime(.0001,t+.34);o.connect(go);go.connect(c.destination);o.start(t);o.stop(t+.36);}
+    function sonidoCorrecto(){if(!sonidosActivos)return;const c=obtenerContextoAudio();if(!c)return;const t=c.currentTime;[[523.25,0],[659.25,.12],[783.99,.24],[1046.5,.38]].forEach(([f,d])=>{const o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.16,t+d+.04);g.gain.exponentialRampToValueAtTime(.0001,t+d+.28);o.connect(g);g.connect(c.destination);o.start(t+d);o.stop(t+d+.3);});}
+    function sonidoIncorrecto(){if(!sonidosActivos)return;const c=obtenerContextoAudio();if(!c)return;const t=c.currentTime,d=.42,b=c.createBuffer(1,c.sampleRate*d,c.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*Math.pow(1-i/a.length,1.7);const n=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();n.buffer=b;f.type='lowpass';f.frequency.setValueAtTime(2600,t);f.frequency.exponentialRampToValueAtTime(75,t+d);g.gain.setValueAtTime(.68,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);n.connect(f);f.connect(g);g.connect(c.destination);n.start(t);n.stop(t+d);const o=c.createOscillator(),go=c.createGain();o.frequency.setValueAtTime(155,t);o.frequency.exponentialRampToValueAtTime(34,t+.32);go.gain.setValueAtTime(.72,t);go.gain.exponentialRampToValueAtTime(.0001,t+.34);o.connect(go);go.connect(c.destination);o.start(t);o.stop(t+.36);}
+
+    function alternarSonido(){sonidosActivos=!sonidosActivos;const b=document.getElementById('btn-sonido');if(b){b.textContent=sonidosActivos?'🔊':'🔇';b.title=sonidosActivos?'Silenciar efectos de sonido':'Activar efectos de sonido';b.setAttribute('aria-label',b.title);b.setAttribute('aria-pressed',String(sonidosActivos));b.classList.toggle('silenciado',!sonidosActivos);}}
 
     function cambiarContraste() {
       document.body.classList.toggle('alto-contraste');
