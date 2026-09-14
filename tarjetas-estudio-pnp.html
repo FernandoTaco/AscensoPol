@@ -8,9 +8,50 @@
 :root{--fondo:#f0f4f8;--tarjeta:#fff;--texto:#17202a;--principal:#0056b3;--verde:#16803a;--borde:#ced4da}
 .alto-contraste{--fondo:#0f0f0f;--tarjeta:#1e1e1e;--texto:#fff;--principal:#7db7ff;--verde:#8ff0a4;--borde:#777}.alto-contraste body{background:var(--fondo);color:var(--texto)}.alto-contraste h1,.alto-contraste label,.alto-contraste .pregunta,.alto-contraste .estado{color:#fff}.alto-contraste .panel,.alto-contraste .tarjeta,.alto-contraste .cara-tarjeta{background:var(--tarjeta);color:#fff}.alto-contraste .tema{background:#252525;color:#fff;border-color:#ddd}.alto-contraste .cara-tarjeta.reverso{background:#203b27;border-color:#8ff0a4}.alto-contraste .instruccion,.alto-contraste .ayuda,.alto-contraste .etiqueta{color:#ddd}
 *{box-sizing:border-box}body{font-family:Arial,sans-serif;background:var(--fondo);color:var(--texto);margin:0 auto;padding:18px;max-width:900px;font-size:18px;line-height:1.45}h1{text-align:center;color:#2c3e50;font-size:28px;margin:8px 0 18px}.panel,.tarjeta{background:var(--tarjeta);border-radius:14px;box-shadow:0 3px 12px #00000018;padding:18px;margin-bottom:16px}label{display:block;font-weight:bold;margin:12px 0 6px;color:#2c3e50}select,button{font:inherit;border-radius:8px;border:1px solid var(--borde);padding:10px 12px}select{width:100%;background:#fff}button{background:var(--principal);color:#fff;border:0;cursor:pointer;font-weight:bold}button:hover{filter:brightness(.9)}.btn-iniciar{width:100%;margin-top:18px;background:#28a745}.oculto{display:none!important}.estado{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:bold;color:#2c3e50;margin-bottom:12px}.tema{font-size:15px;color:#073b66;background:#e8f1fb;border:1px solid #7aa7d8;border-radius:6px;padding:6px 8px;margin-bottom:14px}.tarjeta{min-height:330px;cursor:pointer;text-align:center;position:relative;user-select:none;perspective:1200px}.tarjeta:hover .tarjeta-inner{box-shadow:0 7px 18px #00000025}.tarjeta-inner{width:100%;min-height:330px;position:relative;transition:transform .7s cubic-bezier(.2,.75,.25,1);transform-style:preserve-3d}.tarjeta.volteada .tarjeta-inner{transform:rotateY(180deg)}.cara-tarjeta{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--tarjeta);border:3px solid #d5e5f5;border-radius:14px;padding:28px 20px;display:flex;align-items:center;justify-content:center}.cara-tarjeta.reverso{transform:rotateY(180deg);border-color:#8bc99b;background:#f5fff7}.contenido-tarjeta{width:100%}.etiqueta{font-size:15px;color:#6c757d;margin-bottom:18px;font-weight:bold}.pregunta{font-size:25px;font-weight:bold;color:#2c3e50}.respuesta{font-size:23px;font-weight:bold;color:var(--verde)}.ayuda{font-size:15px;color:#6c757d;margin-top:20px}.navegacion{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.navegacion button{min-width:58px}.btn-volver{background:#6c757d}.btn-barajar{background:#8e44ad}.instruccion{text-align:center;color:#555;font-size:16px;margin-top:5px}@media(max-width:600px){body{padding:10px;font-size:16px}h1{font-size:23px}.pregunta{font-size:21px}.respuesta{font-size:20px}.tarjeta,.tarjeta-inner{min-height:290px}.cara-tarjeta{padding:22px 14px}}
+
+/* Acceso protegido */
+body{background:linear-gradient(135deg,#102a43 0%,#1d4e89 48%,#6c2bd9 100%);min-height:100vh}
+#caja-login{max-width:430px;margin:7vh auto 30px;padding:34px 30px;background:linear-gradient(145deg,#ffffff,#eef6ff);border:1px solid #b9d7f5;border-radius:24px;box-shadow:0 18px 45px #06152666;text-align:center}
+#caja-login .logo-acceso{font-size:52px;margin-bottom:8px}
+#caja-login h2{margin:0 0 10px;color:#123b63;font-size:28px}
+#caja-login p{margin:0 0 20px;color:#486581;font-size:17px}
+#caja-login label{display:block;text-align:left;margin:12px 0 6px;color:#123b63;font-weight:bold;font-size:15px}
+#caja-login input{width:100%;padding:13px 14px;border:2px solid #b7cbe2;border-radius:11px;background:#fff;color:#102a43;font:inherit;outline:none}
+#caja-login input:focus{border-color:#6c2bd9;box-shadow:0 0 0 4px #6c2bd922}
+#caja-login button{width:100%;margin-top:20px;padding:13px;border:0;border-radius:11px;background:linear-gradient(90deg,#1769aa,#6c2bd9);color:#fff;font:inherit;font-weight:bold;cursor:pointer;box-shadow:0 7px 16px #234a7660}
+#caja-login button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+#mensaje-error{color:#a61b1b;background:#fff0f0;border:1px solid #f0aaaa;border-radius:8px;padding:9px;margin-top:14px;display:none;font-size:14px}
+#contenido-protegido{display:none}
+.barra-usuario-tarjetas{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 auto 12px;padding:8px 12px;max-width:900px;background:#ffffffdd;border-radius:12px;color:#123b63;font-size:14px;font-weight:bold}
+.barra-usuario-tarjetas button{background:#c0392b;padding:7px 11px;font-size:14px}
+@media(max-width:600px){#caja-login{margin:4vh 8px 20px;padding:28px 20px}.barra-usuario-tarjetas{font-size:13px}}
+
+/* Paleta suave y de alto contraste para lectura cómoda */
+body{background:linear-gradient(135deg,#edf6ff 0%,#f7f3ff 55%,#fff7ed 100%) !important;color:#17324d}
+h1{color:#17324d !important;text-shadow:none}
+.panel,.tarjeta{background:#ffffff !important;color:#17324d;border-color:#c9dced}
+.estado{color:#17324d !important}
+.pregunta{color:#17324d !important}
+.tema{background:#eef6ff;color:#174a78;border-color:#a9c9e8}
+.instruccion{color:#39556f}
+.alto-contraste body{background:#101827 !important;color:#fff}
 </style>
 </head>
 <body>
+<section id="caja-login" aria-labelledby="titulo-acceso">
+  <div class="logo-acceso">🔐</div>
+  <h2 id="titulo-acceso">Acceso a Tarjetas de Estudio PNP</h2>
+  <p>Ingresa tu código de usuario y contraseña</p>
+  <label for="usuario">Código de usuario</label>
+  <input type="text" id="usuario" placeholder="Ejemplo: USU001" autocomplete="username" oninput="this.value=this.value.toUpperCase().replace(/\s/g,'')">
+  <label for="contrasenia">Contraseña</label>
+  <input type="password" id="contrasenia" placeholder="Ingresa tu contraseña" autocomplete="current-password">
+  <button type="button" onclick="verificarAcceso()">✅ Ingresar</button>
+  <div id="mensaje-error" role="alert">❌ Usuario o contraseña incorrectos.</div>
+</section>
+
+<div id="contenido-protegido">
+  <div class="barra-usuario-tarjetas"><span>👤 Usuario activo: <strong id="usuarioActivo"></strong></span><button type="button" onclick="cerrarSesion()">⏻ Cerrar sesión</button></div>
 <h1>🃏 Tarjetas de estudio PNP</h1>
 <section class="panel" id="configuracion">
   <label for="selector-tema">📖 Selecciona el tema</label>
@@ -52,6 +93,130 @@ function tarjetaAnterior(){if(indice>0){indice--;volteada=false;mostrarTarjeta()
 function barajarPractica(){for(let i=seleccionadas.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[seleccionadas[i],seleccionadas[j]]=[seleccionadas[j],seleccionadas[i]];}indice=0;volteada=false;mostrarTarjeta();}
 function volverConfiguracion(){document.getElementById('practica').classList.add('oculto');document.getElementById('configuracion').classList.remove('oculto');}
 document.getElementById('tarjeta').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();voltearTarjeta();}});cargarTemas();
+</script>
+</div>
+
+<script>
+const baseUsuarios = [
+  { usuario: "USU001", hash: "de514a9683035a2e474b4681d299d19b96b8de07efd61b801eed35da8129a058" },
+  { usuario: "USU002", hash: "d34fb3a506a0c979ebadc49ed6f93f770a604163f0c5fbae789b451a37218297" },
+  { usuario: "USU003", hash: "d21eb17c0ffea6249f838c52cb36e073c0ee7b2aac93c62e957cf4ae9c3d4ab8" },
+  { usuario: "USU004", hash: "ca3cba3b8e502bdd12a0984a90d9c44799eae89d009c4686238468f22bea9100" },
+  { usuario: "USU005", hash: "ceea18546b81a9bd57a12adece552379eb2a1762e9db277e58bdfbf5f52a4e53" },
+  { usuario: "USU006", hash: "8fa0e2bc6d046fa8070ab3ca5ed8237bbec2f065791d147af92c31cab86d39ec" },
+  { usuario: "USU007", hash: "8af1c477dc1f305c9c6cf9f6f52172dbc3871abc727c8671bccfce8752a9e8a5" },
+  { usuario: "USU008", hash: "800463f512b9a759703a61a7974b3a7b87a4bb009ea94ee984e5e34682bfb9bd" },
+  { usuario: "USU009", hash: "1807c94d2633a85481f34d10cb291eb6dff088eed051aaf30dda28b06522b76e" },
+  { usuario: "USU010", hash: "034c211312b7334e6427ea13fd84205d3370f12369deb1dc23cc4daabef5406b" },
+  { usuario: "USU011", hash: "4ab3686642be62ba2f33b80bf76946aaf0389a0f75fcd7591d4fd89ce78fb2f5" },
+  { usuario: "USU012", hash: "0abfe2b2a01e945dc733e04ddd4e5212e698b173b6a8781e950568df4f9028dd" },
+  { usuario: "USU013", hash: "b14e54181bbbeacaa111738799da652ecf6e04c12572035b496756a0ec4b6962" },
+  { usuario: "USU014", hash: "9fdcaf873e80f710fb881c13c122adf87645454a10fd6a2c8611b8a0b878bb1d" },
+  { usuario: "USU015", hash: "7050d46c59c4822c8351d11f69e78d56a19be3a4b74646399f929eb7ce152e69" },
+  { usuario: "USU016", hash: "4be79d59f287e49e05146fdda75cde5431028d53341f3aafc026aa9061703188" },
+  { usuario: "USU017", hash: "b5db684f9e5e54e8a8115462b1f66613d8621fbc0df7159a624d6aee5a4c2560" },
+  { usuario: "USU018", hash: "af4ac9a17ffcd8d40926a3ed76586137a622d93f3f3c837ce2bce3013c6bfa0d" },
+  { usuario: "USU019", hash: "b4198bcbf54ac772f2e80f901cfc608fb5d4e19749ca3009c4dc58031befec21" },
+  { usuario: "USU020", hash: "46ac9dfc43d52a4881031d625bcffc1ceee9718ab56c28bdf5716a2ea3f0a456" },
+  { usuario: "USU021", hash: "c98fbc0bf2c920a6ff72d79727b5f788a0322957bbf03598f6c322119b1c30c4" },
+  { usuario: "USU022", hash: "1f2d5551bc387154ba85bb06172ca43fe9e15e16e6e75e65cd52a6ab34fc32a4" },
+  { usuario: "USU023", hash: "338e856473a7f70262113b75b9516a7bdefadc4db02c1f153aea12732941d9ef" },
+  { usuario: "USU024", hash: "d314b1bbc525dc2c29c445f86857c53ffb93821aed88297a10f7fa98f03c48a1" },
+  { usuario: "USU025", hash: "f437c64285c8025eb192ca711554ad6269607823f79729238d3fccf56ca62b83" },
+  { usuario: "USU026", hash: "6e4cc4517258c18eb9f7346303f127675c247644c202aebd90ca23e42c9f3b78" },
+  { usuario: "USU027", hash: "c43831316ed966e648628c02a5fe0e816f0e2ffc684ebcca75111eeff6dc0143" },
+  { usuario: "USU028", hash: "82b90bb06de820ebcecc7e7167f5223d9755e1173eed2b7a5c0ff8724f7c3f92" },
+  { usuario: "USU029", hash: "6a94b552580b693ec4ed886096d6d397de389dcf6c4910a1c1ea97e87c0302dc" },
+  { usuario: "USU030", hash: "96c3b7493c87c0dcadd320d10860d3175195ba68fc4d113e9082173df50c3822" },
+  { usuario: "USU031", hash: "9a80dba132bd866e71d2f06cc61e151be8669552ee44911c1a5b1a2b3eec5433" },
+  { usuario: "USU032", hash: "eea6535304f8fe8f17a99b6bc48929d9c9111a9622e0e0a4c6f370b6168e28e9" },
+  { usuario: "USU033", hash: "670fe9725c8a7e9a7a13d7141afe4ce4bdb95988b15b26f971e022c1c567e2db" },
+  { usuario: "USU034", hash: "1cdab36c410512522ca3b567623281e81865d1a5e687317ea60ee31a78caf3a4" },
+  { usuario: "USU035", hash: "bdad76ee4745f7956b228066716b5808016efb4080521fc4d759e4e8e7d6f57e" },
+  { usuario: "USU036", hash: "de0d3413f2b7dc86b5daed95c4e21ca633bd754437205d55287d7754229ea064" },
+  { usuario: "USU037", hash: "ffa40fd7b96d52d3f60b136f531545c212a2faa2c1fb01f18f54dd31872cdd7a" },
+  { usuario: "USU038", hash: "49023de586beece9eeaaef110d5d777cfdea0fa0a9d24365afcd2cb2a4c426bf" },
+  { usuario: "USU039", hash: "df27695f597ccfdc3e78adf834dbfe3aedacedc7130a4afdb96db232dbfa2b3c" },
+  { usuario: "USU040", hash: "44a75ca249f9fca55d769eace09e9d2f2bdde974e01de9f60bdbae99dd69d035" },
+  { usuario: "USU041", hash: "a7a6fa0ecf234b3cf2ad6e11d559f7634b1c1b6ebc471b6511288cacf7bde5f9" },
+  { usuario: "USU042", hash: "12c6337c508bf64c8e9e52884953981273895bfe3ad99259f22a193c7b08cf8e" },
+  { usuario: "USU043", hash: "cd8501c1d0409995ffa0399638a6d3fb7c3e8864b73c24e460da8418d2abc6fb" },
+  { usuario: "USU044", hash: "ab1b00f10e3b0fb768a38e3ce3c5e6b5833b3eeb603b2dca57c2c30b8161b0b9" },
+  { usuario: "USU045", hash: "558cdfff2c877537a7729baf67710ae9cb5e760a3865a4b1e26d6a10d5d6e703" },
+  { usuario: "USU046", hash: "0564e773d9017db5e95a6423f2a0c0261b3d89c8d2fe420000e1a0b24bf121c7" },
+  { usuario: "USU047", hash: "24c9938a614eed4c317b5070b9ac6452a1d8b8231b3ae72a6bbc9f1f34fd49a1" },
+  { usuario: "USU048", hash: "26c93c6ef158543ed2a7207e7ce31518828d2d893dfeea0c0940be0f6e3c1929" },
+  { usuario: "USU049", hash: "15969e08060a59809f16075f712c75e9e810139e7bd8a0347d4072b827f64955" },
+  { usuario: "USU050", hash: "64fa2daee85295c413f30c550be747e121f436f12eb5fd58a8e5169def04a0b0" },
+  { usuario: "USU051", hash: "4aed0f0ea5a7b408c70922996af206ec63f7fec741657acf97c80e1b4ec39251" },
+  { usuario: "USU052", hash: "39f2db435b22bae465f78787e82ceed6d90139598639d0966efaf9d59a42e3ae" },
+  { usuario: "USU053", hash: "d47c0874698ab3fc69c99902a2fccbc0fda419cff530d14204d4aaa19dce60cc" },
+  { usuario: "USU054", hash: "3692655336caf5baded6359f6d3f87d84b866f356f643ad72f5825093d05c61e" },
+  { usuario: "USU055", hash: "df9c38aaf15b0d2be554d24e7c34968e41842d8cf5c3fdc2379e7c15e3fbe41d" },
+  { usuario: "USU056", hash: "dd67994cf389d7e7ffcdcb6cb8ffe411b995a104e5d138f2240a98b9d4bc46a6" },
+  { usuario: "USU057", hash: "e476a5a6e690cc92a747c7f1c75a9b4b818ad2e7a2c8d0d93454b0733f0ab3cd" },
+  { usuario: "USU058", hash: "0164f12bdb2e3a0568df0be756333d2cd4520a1c3a9abf3c3ee685d430ef6f65" },
+  { usuario: "USU059", hash: "693565a9f5ba20335073973c7b06b63ec157ee2e45ac4f779c09258dd4bcc0fd" },
+  { usuario: "USU060", hash: "d658d5bd8184d9b6c6f46b2db18f31d60158825c77773d610f2025ccdd5d0380" },
+  { usuario: "USU061", hash: "751946ba10b4806d72baa83fdf5c10354e22ae561c07e57412df1eda30429fd5" },
+  { usuario: "USU062", hash: "5b0eb151cac233c18403734c1eb6b199ec3867daaa0fc7ed85a85a7029964343" },
+  { usuario: "USU063", hash: "c18ca86b3942886e3e8b23ab7a08e84ffe1a8ceca33615e4ff5a71bbefbf4d4b" },
+  { usuario: "USU064", hash: "f593ef61e4fb7f268c605a0fdef094e2fda138d24682c88bf16b0da49dc158c3" },
+  { usuario: "USU065", hash: "a6eb845e79005169aa5570a192d5ee6120d0d78b5d68b9c0fa8843a51b9d8b12" },
+  { usuario: "USU066", hash: "9017de289cd93c1d5e33789e9d5d04502e36520a8ac75a4b7a1dd5cc704b6d42" },
+  { usuario: "USU067", hash: "cc99c8fc98fda847879ec7afaf3459144387b2c26a781e5fbcea2b6858623ff7" },
+  { usuario: "USU068", hash: "cd606999bc54727384153a7c75500480d93fdafd5124cea132065110619aee80" },
+  { usuario: "USU069", hash: "f97a24a09eb045ab5b267e8ee9607b9f9f90937539c1d9d762d387ebafc6366c" },
+  { usuario: "USU070", hash: "4dbfc999b2232771c36ac2ffc1f828dff794b49ddecaa3404c6f59b20d72bd88" },
+  { usuario: "USU071", hash: "d9fe42b58cbb539b24fe81bf68c09a9944f47c9f359f052062e485786bf6f0ae" },
+  { usuario: "USU072", hash: "10018f40835ee999e5f62233024034505473ed08528c4a0a4b2b697ee4e8f57d" },
+  { usuario: "USU073", hash: "f43cafcfb1a9e6aa7e308c59fe975572f7e777bd5e04395cdde5275b8fb6dac8" },
+  { usuario: "USU074", hash: "f2771f735668a90cdf09c7336e3c46fbe2f6d899d637332680da06bc9e2a25b0" },
+  { usuario: "USU075", hash: "d8e6f00ce92c1f9f1f9815d06d259b64e0df0e4671366a493a53757dae8393e4" },
+  { usuario: "USU076", hash: "4f297877bce19471d94eb520eac1982d344eb87db3d372fc126fb4f608883f90" },
+  { usuario: "USU077", hash: "f897b90b0d6b60649072375f5db846052f55fb47e454f504d63c9a6677a4d959" },
+  { usuario: "USU078", hash: "4b87f5f1a610d264ebfa6912c82738d04e6992599384df5c75ce356abd607bce" },
+  { usuario: "USU079", hash: "b95533ce10720c93efc10f405d25725b98e60dc644e71e8a03f36742e9e1a0ad" },
+  { usuario: "USU080", hash: "c70b2b5145f37e82a0906095b3b015fd8448c891b11fcc8544a8dfb4760947fe" },
+  { usuario: "USU081", hash: "416c0f2f1d27dfca1651007d1a74b561ad9fbaa87698a878832ab79ec406523f" },
+  { usuario: "USU082", hash: "aea80bfc67de4e1df0e4204e1e8a396eee3cae55db840524ba82fdd7c1755628" },
+  { usuario: "USU083", hash: "52fab6fb0ecde8ad3fc2fe15c07aef64c089ae504580598b82f979cd54b00ef5" },
+  { usuario: "USU084", hash: "773e93effa9ab3d7c71cf351205a85c8796afc68d64fac2dbae6b5c9b31a99d4" },
+  { usuario: "USU085", hash: "cfb7ec633e51da415f95da627b92cf20d98b557b79c450ba23492b6182521e31" },
+  { usuario: "USU086", hash: "f16fdb09da8429fc5005b2609d8790d6e0ccd0212e71d21c0c067c23e9002303" },
+  { usuario: "USU087", hash: "022977f03b61e65f105d35248c0cfba83983511a8a98448530eb3835f7915072" },
+  { usuario: "USU088", hash: "b34eaee5cc216b6ed329440b7dc97beac5034265bdfef8951ccd1455a056c058" },
+  { usuario: "USU089", hash: "55302808c98ad75b4aa53e1362a447c6cd6741dc17ccbfde8f584bf1c020019a" },
+  { usuario: "USU090", hash: "c744d8f8f2ce9cdfdad526cb571c796518bde55fb7f1decf40fcfccc9f2c15e2" },
+  { usuario: "USU091", hash: "5d74fbf462e1ef158441c689c3185bbb78acc110e8e8ffe09e042d937fc0d68b" },
+  { usuario: "USU092", hash: "0c30d0ca6c13a799befffd3e8afd5c61bda04304d6e23f7607fa9efeb65fa35a" },
+  { usuario: "USU093", hash: "a8d2d268eeafcc17abd00f66ddab2c5090cd982566a07b956418277deab427f8" },
+  { usuario: "USU094", hash: "25ee04f82b75eae05b56cd687e1bf418bdb8a5fc0276bbfb8138c34bb1987183" },
+  { usuario: "USU095", hash: "f64e11e8ae46cde43b0d3f1b54f5b122b0cfe243546ff3317ac618f47dd65ffb" },
+  { usuario: "USU096", hash: "1d9441e32e5b087d1e3f348e1a3fed5aafccf87b81c7010e79bdd75aa4785a8b" },
+  { usuario: "USU097", hash: "9086c86849a7f746802319d680bbeb0aa818f9eef0f9bc1dc2a5f84937204f60" },
+  { usuario: "USU098", hash: "b2e129be234b7b3f538c85e51a4b509c45afdc11788734fa017f5e9351e278a8" },
+  { usuario: "USU099", hash: "c230ddc7d43f9925d9dd21a462246b6f88ddf80d11564e8d44609591918464b9" },
+  { usuario: "USU100", hash: "bd9b45e9eb520e83b89168f0682dcea195854d6f3055fcf0e6c6099f5282c056" }
+];
+async function obtenerHash(texto){const data=new TextEncoder().encode(texto);const buf=await crypto.subtle.digest('SHA-256',data);return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+async function verificarAcceso(){const btn=document.querySelector('#caja-login button'),err=document.getElementById('mensaje-error');if(btn.disabled)return;btn.disabled=true;try{const u=document.getElementById('usuario').value.trim().toUpperCase(),p=document.getElementById('contrasenia').value;if(!u||!p){err.textContent='⚠️ Completa ambos campos.';err.style.display='block';return;}const h=await obtenerHash(p),ok=baseUsuarios.find(x=>x.usuario===u&&x.hash===h);if(ok){err.style.display='none';document.getElementById('caja-login').style.display='none';document.getElementById('contenido-simulador').style.display='block';document.getElementById('usuarioActivo').textContent=ok.usuario;}else{err.textContent='❌ Usuario o contraseña incorrectos.';err.style.display='block';document.getElementById('contrasenia').value='';}}catch(e){err.textContent='⚠️ No se pudo validar el acceso.';err.style.display='block';}finally{btn.disabled=false;}}
+function cerrarSesion(){reiniciarTodo();document.getElementById('contenido-simulador').style.display='none';document.getElementById('caja-login').style.display='block';document.getElementById('usuario').value='';document.getElementById('contrasenia').value='';document.getElementById('mensaje-error').style.display='none';}
+
+
+/* ===== LECTOR DE VOZ PARA CADA ENUNCIADO ===== */
+let botonVozActivo = null;
+
+function detenerLectura() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if (botonVozActivo) {
+    botonVozActivo.classList.remove('leyendo');
+    botonVozActivo = null;
+  }
+}
+async function verificarAcceso(){const btn=document.querySelector('#caja-login button'),err=document.getElementById('mensaje-error');if(btn.disabled)return;btn.disabled=true;try{const u=document.getElementById('usuario').value.trim().toUpperCase(),p=document.getElementById('contrasenia').value;if(!u||!p){err.textContent='⚠️ Completa ambos campos.';err.style.display='block';return;}const h=await obtenerHash(p),ok=baseUsuarios.find(x=>x.usuario===u&&x.hash===h);if(ok){err.style.display='none';document.getElementById('caja-login').style.display='none';document.getElementById('contenido-protegido').style.display='block';document.getElementById('usuarioActivo').textContent=ok.usuario;}else{err.textContent='❌ Usuario o contraseña incorrectos.';err.style.display='block';document.getElementById('contrasenia').value='';}}catch(e){err.textContent='⚠️ No se pudo validar el acceso.';err.style.display='block';}finally{btn.disabled=false;}}
+function cerrarSesion(){document.getElementById('contenido-protegido').style.display='none';document.getElementById('caja-login').style.display='block';document.getElementById('usuario').value='';document.getElementById('contrasenia').value='';document.getElementById('mensaje-error').style.display='none';}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('caja-login').style.display!=='none'){e.preventDefault();verificarAcceso();}});
 </script>
 </body>
 </html>
